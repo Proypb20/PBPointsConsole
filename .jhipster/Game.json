@@ -1,0 +1,85 @@
+{
+  "name": "Game",
+  "fields": [
+    {
+      "fieldName": "gameNum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "clasif",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "splitdeckNum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pointsA",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pointsB",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "overA",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "overB",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pvpA",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pvpB",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "timeLeft",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "CREATED,PENDING,IN_PROGRESS,DONE,SUSPENDED,CANCEL"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "game",
+      "relationshipValidateRules": "required",
+      "relationshipName": "teamA",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "game",
+      "relationshipValidateRules": "required",
+      "relationshipName": "teamB",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipName": "category",
+      "otherEntityName": "category",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "game",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["PBPointsConsole"],
+  "changelogDate": "20211202220211"
+}

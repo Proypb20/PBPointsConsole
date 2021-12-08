@@ -1,0 +1,164 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-game-heading" data-cy="GameCreateUpdateHeading" jhiTranslate="pbPointsConsoleApp.game.home.createOrEditLabel">
+        Create or edit a Game
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.gameNum" for="field_gameNum">Game Num</label>
+          <input type="number" class="form-control" name="gameNum" id="field_gameNum" data-cy="gameNum" formControlName="gameNum" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.clasif" for="field_clasif">Clasif</label>
+          <input type="text" class="form-control" name="clasif" id="field_clasif" data-cy="clasif" formControlName="clasif" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.splitdeckNum" for="field_splitdeckNum"
+            >Splitdeck Num</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="splitdeckNum"
+            id="field_splitdeckNum"
+            data-cy="splitdeckNum"
+            formControlName="splitdeckNum"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.pointsA" for="field_pointsA">Points A</label>
+          <input type="number" class="form-control" name="pointsA" id="field_pointsA" data-cy="pointsA" formControlName="pointsA" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.pointsB" for="field_pointsB">Points B</label>
+          <input type="number" class="form-control" name="pointsB" id="field_pointsB" data-cy="pointsB" formControlName="pointsB" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.overA" for="field_overA">Over A</label>
+          <input type="number" class="form-control" name="overA" id="field_overA" data-cy="overA" formControlName="overA" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.overB" for="field_overB">Over B</label>
+          <input type="number" class="form-control" name="overB" id="field_overB" data-cy="overB" formControlName="overB" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.pvpA" for="field_pvpA">Pvp A</label>
+          <input type="number" class="form-control" name="pvpA" id="field_pvpA" data-cy="pvpA" formControlName="pvpA" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.pvpB" for="field_pvpB">Pvp B</label>
+          <input type="number" class="form-control" name="pvpB" id="field_pvpB" data-cy="pvpB" formControlName="pvpB" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.timeLeft" for="field_timeLeft">Time Left</label>
+          <input type="number" class="form-control" name="timeLeft" id="field_timeLeft" data-cy="timeLeft" formControlName="timeLeft" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'pbPointsConsoleApp.Status.null' | translate }}</option>
+            <option value="CREATED">{{ 'pbPointsConsoleApp.Status.CREATED' | translate }}</option>
+            <option value="PENDING">{{ 'pbPointsConsoleApp.Status.PENDING' | translate }}</option>
+            <option value="IN_PROGRESS">{{ 'pbPointsConsoleApp.Status.IN_PROGRESS' | translate }}</option>
+            <option value="DONE">{{ 'pbPointsConsoleApp.Status.DONE' | translate }}</option>
+            <option value="SUSPENDED">{{ 'pbPointsConsoleApp.Status.SUSPENDED' | translate }}</option>
+            <option value="CANCEL">{{ 'pbPointsConsoleApp.Status.CANCEL' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.teamA" for="field_teamA">Team A</label>
+          <select class="form-control" id="field_teamA" data-cy="teamA" name="teamA" formControlName="teamA">
+            <option *ngIf="!editForm.get('teamA')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="teamOption.id === editForm.get('teamA')!.value?.id ? editForm.get('teamA')!.value : teamOption"
+              *ngFor="let teamOption of teamsSharedCollection; trackBy: trackTeamById"
+            >
+              {{ teamOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['teamA'])!.invalid && (editForm.get(['teamA'])!.dirty || editForm.get(['teamA'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['teamA'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.teamB" for="field_teamB">Team B</label>
+          <select class="form-control" id="field_teamB" data-cy="teamB" name="teamB" formControlName="teamB">
+            <option *ngIf="!editForm.get('teamB')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="teamOption.id === editForm.get('teamB')!.value?.id ? editForm.get('teamB')!.value : teamOption"
+              *ngFor="let teamOption of teamsSharedCollection; trackBy: trackTeamById"
+            >
+              {{ teamOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['teamB'])!.invalid && (editForm.get(['teamB'])!.dirty || editForm.get(['teamB'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['teamB'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pbPointsConsoleApp.game.category" for="field_category">Category</label>
+          <select class="form-control" id="field_category" data-cy="category" name="category" formControlName="category">
+            <option *ngIf="!editForm.get('category')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="categoryOption.id === editForm.get('category')!.value?.id ? editForm.get('category')!.value : categoryOption"
+              *ngFor="let categoryOption of categoriesSharedCollection; trackBy: trackCategoryById"
+            >
+              {{ categoryOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['category'])!.invalid && (editForm.get(['category'])!.dirty || editForm.get(['category'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['category'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

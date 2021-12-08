@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="GameHeading">
+    <span jhiTranslate="pbPointsConsoleApp.game.home.title">Games</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pbPointsConsoleApp.game.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-game"
+        [routerLink]="['/game/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pbPointsConsoleApp.game.home.createLabel"> Create a new Game </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="games?.length === 0">
+    <span jhiTranslate="pbPointsConsoleApp.game.home.notFound">No games found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="games && games.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <!--<th scope="col"><span jhiTranslate="global.field.id">ID</span></th>-->
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.gameNum">Game Num</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.category">Category</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.clasif">Clasif</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.splitdeckNum">Splitdeck Num</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.teamA">Team A</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.teamB">Team B</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.pointsA">Points A</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.pointsB">Points B</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.overA">Over A</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.overB">Over B</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.pvpA">Pvp A</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.pvpB">Pvp B</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.timeLeft">Time Left</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.game.status">Status</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games; trackBy: trackId" data-cy="entityTable">
+          <!--<td>
+            <a [routerLink]="['/game', game.id, 'view']">{{ game.id }}</a>
+          </td>-->
+          <td>{{ game.gameNum }}</td>
+          <td>{{ game.category?.name }}</td>
+          <td>{{ game.clasif }}</td>
+          <td>{{ game.splitdeckNum }}</td>
+          <td>{{ game.teamA?.name }}</td>
+          <td>{{ game.teamB?.name }}</td>
+          <td>{{ game.pointsA }}</td>
+          <td>{{ game.pointsB }}</td>
+          <td>{{ game.overA }}</td>
+          <td>{{ game.overB }}</td>
+          <td>{{ game.pvpA }}</td>
+          <td>{{ game.pvpB }}</td>
+          <td>{{ game.timeLeft }}</td>
+          <td jhiTranslate="{{ 'pbPointsConsoleApp.Status.' + game.status }}">{{ game.status }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/game', game.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+              <button type="submit" (click)="delete(game)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

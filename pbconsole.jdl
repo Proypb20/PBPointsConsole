@@ -1,0 +1,99 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName PBPointsConsole
+    blueprints []
+    buildTool gradle
+    cacheProvider caffeine
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme litera
+    clientThemeVariant light
+    creationTimestamp 1638482351191
+    databaseType sql
+    devDatabaseType h2Disk
+    dtoSuffix DTO
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    jhiPrefix jhi
+    jhipsterVersion "7.0.1"
+    jwtSecretKey "MWY0OTZiMTE4ZjY3NWQ1NTg0NjhiYmMwODZlY2JkNzlmMWQwNWVmMTdhZjliMjY4YmE4YmEyZjMwNGVjOGQxNmQzMjY2ODU4NThjYjg5MzE1MjVlNmVlYjMxZmU0ZDE2YmIwMDU4MWM3OGI4MmVjZjA1M2UzMzRkODg1YmMxMDQ="
+    languages [en, pt-br, es]
+    messageBroker false
+    nativeLanguage en
+    otherModules []
+    packageName com.pbpoints.console
+    prodDatabaseType mysql
+    reactive false
+    searchEngine false
+    serverPort 8080
+    serviceDiscoveryType false
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities Category, Event, Game, Team, Tournament
+}
+
+entity Category {
+  name String required
+  gameTimeType String required
+  gameTime Integer required
+  stopTimeType String required
+  stopTime Integer
+  stopSdTimeType String required
+  stopSdTime Integer required
+  points Integer
+  difPoints Integer required
+}
+entity Event {
+  name String
+  status Status
+}
+entity Game {
+  gameNum Integer
+  clasif String
+  splitdeckNum Integer
+  pointsA Integer
+  pointsB Integer
+  overA Integer
+  overB Integer
+  pvpA Integer
+  pvpB Integer
+  timeLeft Integer
+  status Status
+}
+
+entity Team {
+  name String required
+  logo ImageBlob
+}
+entity Tournament {
+  name String required
+}
+
+enum Status {
+  CREATED,
+  PENDING,
+  IN_PROGRESS,
+  DONE,
+  SUSPENDED,
+  CANCEL
+}
+
+relationship ManyToOne {
+  Category{event(name) required} to Event
+  Event{tournament(name) required} to Tournament
+  Game{teamA(name) required} to Team
+  Game{teamB(name) required} to Team
+}
+
+dto Category, Event, Game, Team, Tournament with mapstruct
+service Category, Event, Game, Team, Tournament with serviceClass
+filter Category, Event, Game, Team, Tournament

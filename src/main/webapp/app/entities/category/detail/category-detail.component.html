@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading"><span jhiTranslate="pbPointsConsoleApp.category.detail.title">Category</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ category.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.name">Name</span></dt>
+        <dd>
+          <span>{{ category.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.gameTimeType">Game Time Type</span></dt>
+        <dd>
+          <span>{{ category.gameTimeType }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.gameTime">Game Time</span></dt>
+        <dd>
+          <span>{{ category.gameTime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.stopTimeType">Stop Time Type</span></dt>
+        <dd>
+          <span>{{ category.stopTimeType }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.stopTime">Stop Time</span></dt>
+        <dd>
+          <span>{{ category.stopTime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.stopSdTimeType">Stop Sd Time Type</span></dt>
+        <dd>
+          <span>{{ category.stopSdTimeType }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.stopSdTime">Stop Sd Time</span></dt>
+        <dd>
+          <span>{{ category.stopSdTime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.points">Points</span></dt>
+        <dd>
+          <span>{{ category.points }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.difPoints">Dif Points</span></dt>
+        <dd>
+          <span>{{ category.difPoints }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.category.event">Event</span></dt>
+        <dd>
+          <div *ngIf="category.event">
+            <a [routerLink]="['/event', category.event?.id, 'view']">{{ category.event?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

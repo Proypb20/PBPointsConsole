@@ -1,0 +1,186 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <table style="width: 100%; height: 100%; padding:5" border="2" cellpadding="7">
+              <tr>
+                <td colspan="2" style="text-align:center;font-size: 35px; width:25%; padding:5">{{teamA}}</td>
+                <td colspan="4" style="text-align:center;font-size: 20px;width:50%; padding:5"><span *ngIf="changeSide()">Cambio de lado</span></td>
+                <td colspan="2" style="text-align:center;font-size: 35px; width:25%; padding:5">{{teamB}}</td>
+              </tr>
+              <tr>
+                <td colspan="1" style="width:5%; padding:5"></td>
+                <td rowspan="5" style="text-align:center;font-size: 175px;width:20%; padding:5" name="pointA" id="pointA">{{pointsA}}</td>
+                <td style="text-align:center;width:15%; padding:5">
+                  <button type="button" id="plus1m" class="btn btn-primary" (click)="plus1m()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+                <td rowspan="2" colspan="2" style="text-align:center;font-size: 75px;width:20%; padding:5" id="game">{{formatTime(gameTime)}}</td>
+                <td style="text-align:center;width:15%; padding:5">
+                  <button type="button" id="plus1s" class="btn btn-primary" (click)="plus1s()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+                <td rowspan="5" style="text-align:center;font-size: 175px;width:20%; padding:5" name="pointB" id="pointB">{{pointsB}}</td>
+                <td colspan="1" style="width:5%; padding:5"></td>
+              </tr>
+
+              <tr>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="plusPointA" class="btn btn-primary" (click)="plusPointA()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="min1m" class="btn btn-primary" (click)="min1m()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="min1s" class="btn btn-primary" (click)="min1s()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="plusPointB" class="btn btn-primary" (click)="plusPointB()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="minPointA" class="btn btn-primary" (click)="minPointA()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="plusMin2" class="btn btn-primary" (click)="plusMin2()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+                <td rowspan="2" colspan="2" style="text-align:center;font-size: 60px; padding:5" id="break">{{formatTime(gameStop)}}</td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="plusSec2" class="btn btn-primary" (click)="plusSec2()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.plus">Plus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="minPointB" class="btn btn-primary" (click)="minPointB()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="1" ></td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="minMin2" class="btn btn-primary" (click)="minMin2()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="minSec2" class="btn btn-primary" (click)="minSec2()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.minus">Minus</span>
+                  </button>
+                </td>
+                <td colspan="1" ></td>
+              </tr>
+
+              <tr style="height:10px">
+                <td colspan="1" ></td>
+                <td colspan="2" style="text-align:center;font-size: 20px; padding:5"><span>Tiempo de Juego:</span></td>
+                <td colspan="2" style="text-align:center;font-size: 20px; padding:5"><span>{{getGameTime()}}</span></td>
+                <td colspan="1" ></td>
+              </tr>
+
+            </table>
+            <table style="width: 100%; height: 40%" border="2" cellpadding="8">
+              <tr>
+                <td style="text-align:center;font-size: 20px;width:20%;font-size: 20px; padding:5">Categoria:</td>
+                <td colspan="2" style="text-align:center;font-size: 20px;width:30%;font-size: 20px; padding:5"><span>{{editForm.get('category')!.value.name}}</span></td>
+                <td style="text-align:center;font-size: 20px;width:10%;font-size: 20px; padding:5"><a id="s10" class="btn btn-primary"><span>00:10</span></a></td>
+                <td style="text-align:center;font-size: 20px;width:10%;font-size: 20px; padding:5"><a id="s30" class="btn btn-primary"><span>00:30</span></a></td>
+                <td colspan="2" style="text-align:center;font-size: 20px;width:20%;font-size: 20px; padding:5"><a id="start" class="btn btn-primary"><span>Iniciar Juego</span></a></td>
+              </tr>
+
+              <tr>
+
+                <td style="text-align:center;font-size: 20px;width:20%; padding:5"><span>Tiempo Restante:</span></td>
+                <td colspan="2" style="text-align:center;font-size: 20px;width:30%; padding:5"><span>{{formatTime(editForm.get('nextTimeLeft')!.value)}}</span></td>
+                <td style="text-align:center; padding:5"><a id="m1" class="btn btn-primary"><span>01:00</span></a></td>
+                <td style="text-align:center; padding:5"><a id="m130" class="btn btn-primary"><span>01:30</span></a></td>
+                <td colspan="2" style="text-align:center; padding:5"><a href="/main/endPoint" class="btn btn-primary"><span>Anotar punto</span></a></td>
+              </tr>
+
+              <tr>
+                <td style="text-align:center;font-size: 20px;width:20%; padding:0"><span>Proximo Juego:</span></td>
+                <td style="text-align:center;font-size: 20px;width:15%; padding:5"><span>{{editForm.get('nextTeamA')!.value.name}}</span></td>
+                <td style="text-align:center;font-size: 20px;width:15%; padding:5"><span>{{editForm.get('nextTeamB')!.value.name}}</span></td>
+                <td style="text-align:center; padding:5"><a id="m2" class="btn btn-primary"><span>02:00</span></a></td>
+                <td style="text-align:center; padding:5"><a id="timeOut" class="btn btn-primary"><span>Tiempo Muerto</span></a></td>
+                <td colspan="2" style="text-align:center; padding:5"><a href="/main/towel" class="btn btn-primary"><span>Ceder punto</span></a></td>
+              </tr>
+
+              <tr>
+                <td rowspan="3" colspan="3"></td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="resetTime" class="btn btn-primary" (click)="resetTime()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.resetTime">Reiniciar Tiempo</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="resetGame" class="btn btn-primary" (click)="resetGame()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.resetGame">Reiniciar Juego</span>
+                  </button>
+                </td>
+                <td colspan="2" style="text-align:center; padding:5">
+                  <button type="button" id="stopPoint" class="btn btn-primary" (click)="stopPoint()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.stopPoint">Detener Punto</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center; padding:5">
+                    <button type="button" id="buzzer" class="btn btn-primary" (click)="playBuzzer()">
+                      <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.buzzer">Buzzer</span>
+                    </button>
+                </td>
+                <td colspan="2" style="text-align:center; padding:5"><button type="button" id="stopGame" class="btn btn-primary" (click)="stopGame()">
+                  <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.stopGame">Detener Juego</span>
+                </button></td>
+              </tr>
+
+              <tr>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="OverDes" class="btn btn-primary" (click)="overDes()">
+                  <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.fieldStatusAct">Overtime Desactivado</span>
+                </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="OverAct" class="btn btn-primary" (click)="overAct()">
+                  <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.fieldStatusAct">Overtime Activado</span>
+                </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="last" class="btn btn-primary" (click)="last()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.last">Ultimo Partido</span>
+                  </button>
+                </td>
+                <td style="text-align:center; padding:5">
+                  <button type="button" id="next" class="btn btn-primary" (click)="next()">
+                    <span class="d-none d-md-inline" jhiTranslate="pbPointsConsoleApp.game.action.next">Proximo partido</span>
+                  </button>
+                </td>
+              </tr>
+
+            </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

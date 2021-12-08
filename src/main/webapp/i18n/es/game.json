@@ -1,0 +1,53 @@
+{
+  "pbPointsConsoleApp": {
+    "game": {
+      "home": {
+        "title": "Games",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Game",
+        "createOrEditLabel": "Crear o editar Game",
+        "notFound": "Ningún Games encontrado"
+      },
+      "created": "Un nuevo Game ha sido creado con el identificador {{ param }}",
+      "updated": "Un Game ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Game ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Game {{ id }}?"
+      },
+      "detail": {
+        "title": "Game"
+      },
+      "id": "ID",
+      "gameNum": "Game Num",
+      "clasif": "Clasif",
+      "splitdeckNum": "Splitdeck Num",
+      "pointsA": "Points A",
+      "pointsB": "Points B",
+      "overA": "Over A",
+      "overB": "Over B",
+      "pvpA": "Pvp A",
+      "pvpB": "Pvp B",
+      "timeLeft": "Time Left",
+      "status": "Status",
+      "teamA": "Team A",
+      "teamB": "Team B",
+      "category": "Categoria",
+      "action": {
+        "buzzer": "Buzzer",
+        "next": "Siguiente",
+        "last": "Anterior",
+        "reset": "Reiniciar Tiempo",
+        "overAct": "Overtime Activado",
+        "overDes": "Overtime Desactivado",
+        "stopGame": "Detener Juego",
+        "stopPoint": "Detener Punto",
+        "resetGame": "Reiniciar Juego",
+        "resetTime": "Reiniciar Tiempo",
+        "fieldStatusAct": "Campo Activo",
+        "fieldStatusDesc": "Campo Inactivo",
+        "minus": "-",
+        "plus": "+"
+      }
+    }
+  }
+}

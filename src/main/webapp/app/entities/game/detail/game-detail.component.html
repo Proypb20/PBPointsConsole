@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="game">
+      <h2 data-cy="gameDetailsHeading"><span jhiTranslate="pbPointsConsoleApp.game.detail.title">Game</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ game.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.gameNum">Game Num</span></dt>
+        <dd>
+          <span>{{ game.gameNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.clasif">Clasif</span></dt>
+        <dd>
+          <span>{{ game.clasif }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.splitdeckNum">Splitdeck Num</span></dt>
+        <dd>
+          <span>{{ game.splitdeckNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.pointsA">Points A</span></dt>
+        <dd>
+          <span>{{ game.pointsA }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.pointsB">Points B</span></dt>
+        <dd>
+          <span>{{ game.pointsB }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.overA">Over A</span></dt>
+        <dd>
+          <span>{{ game.overA }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.overB">Over B</span></dt>
+        <dd>
+          <span>{{ game.overB }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.pvpA">Pvp A</span></dt>
+        <dd>
+          <span>{{ game.pvpA }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.pvpB">Pvp B</span></dt>
+        <dd>
+          <span>{{ game.pvpB }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.timeLeft">Time Left</span></dt>
+        <dd>
+          <span>{{ game.timeLeft }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pbPointsConsoleApp.Status.' + game.status }}">{{ game.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.teamA">Team A</span></dt>
+        <dd>
+          <div *ngIf="game.teamA">
+            <a [routerLink]="['/team', game.teamA?.id, 'view']">{{ game.teamA?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.teamB">Team B</span></dt>
+        <dd>
+          <div *ngIf="game.teamB">
+            <a [routerLink]="['/team', game.teamB?.id, 'view']">{{ game.teamB?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pbPointsConsoleApp.game.category">Category</span></dt>
+        <dd>
+          <div *ngIf="game.category">
+            <a [routerLink]="['/category', game.category?.id, 'view']">{{ game.category?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/game', game.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

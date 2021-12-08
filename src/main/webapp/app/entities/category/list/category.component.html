@@ -1,0 +1,87 @@
+<div>
+  <h2 id="page-heading" data-cy="CategoryHeading">
+    <span jhiTranslate="pbPointsConsoleApp.category.home.title">Categories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pbPointsConsoleApp.category.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-category"
+        [routerLink]="['/category/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pbPointsConsoleApp.category.home.createLabel"> Create a new Category </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="categories?.length === 0">
+    <span jhiTranslate="pbPointsConsoleApp.category.home.notFound">No categories found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="categories && categories.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <!--<th scope="col"><span jhiTranslate="global.field.id">ID</span></th>-->
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.event">Event</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.name">Name</span></th>
+          <!--<th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.gameTimeType">Game Time Type</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.gameTime">Game Time</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.stopTimeType">Stop Time Type</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.stopTime">Stop Time</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.stopSdTimeType">Stop Sd Time Type</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.stopSdTime">Stop Sd Time</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.points">Points</span></th>
+          <th scope="col"><span jhiTranslate="pbPointsConsoleApp.category.difPoints">Dif Points</span></th>-->
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; trackBy: trackId" data-cy="entityTable">
+          <!--<td>
+            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
+          </td>-->
+          <td>{{ category.event?.tournament?.name }}, {{ category.event?.name }}</td>
+          <td>{{ category.name }}</td>
+          <!--<td>{{ category.gameTimeType }}</td>
+          <td>{{ category.gameTime }}</td>
+          <td>{{ category.stopTimeType }}</td>
+          <td>{{ category.stopTime }}</td>
+          <td>{{ category.stopSdTimeType }}</td>
+          <td>{{ category.stopSdTime }}</td>
+          <td>{{ category.points }}</td>
+          <td>{{ category.difPoints }}</td>-->
+          <td class="text-right">
+            <div class="btn-group">
+
+              <button
+                type="submit"
+                [routerLink]="['/category', category.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(category)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

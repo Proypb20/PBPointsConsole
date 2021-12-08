@@ -1,0 +1,13 @@
+{
+  "pbPointsConsoleApp": {
+    "Status": {
+      "null": "",
+      "CREATED": "Created",
+      "PENDING": "Pending",
+      "IN_PROGRESS": "In Progress",
+      "DONE": "Done",
+      "SUSPENDED": "Suspended",
+      "CANCEL": "Cancelled"
+    }
+  }
+}
